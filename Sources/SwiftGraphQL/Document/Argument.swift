@@ -82,5 +82,5 @@ public struct Argument: Hashable {
 
 extension Array where Element == Argument {
     /// Returns the hash of the collection of arguments.
-    var hash: String { hashValue.hash }
+    var hash: String { stableHash() }
 }
