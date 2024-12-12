@@ -14,7 +14,7 @@ public struct Argument: Hashable {
     
     let value: AnyCodable?
 
-    /*
+    /**
      NOTE:
         We use an internal VariableEncoder structure that is
         a chiseled version of Swift's JSONEncoder. The main difference
@@ -59,7 +59,7 @@ public struct Argument: Hashable {
 
     // MARK: Hashable Value
 
-    /*
+    /**
      We use hashable value struct to make sure that fields with same values
      but different paths or names don't collide in the variables.
 
@@ -82,5 +82,12 @@ public struct Argument: Hashable {
 
 extension Array where Element == Argument {
     /// Returns the hash of the collection of arguments.
-    var hash: String { stableHash() }
+    var hash: String {
+        let combined = self.compactMap {
+            guard let description = $0.value?.description else { return nil }
+            return description
+        }.joined(separator: "||")
+
+        return combined.stableHash
+    }
 }

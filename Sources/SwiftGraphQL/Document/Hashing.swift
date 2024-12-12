@@ -17,14 +17,3 @@ extension String {
         return hash.compactMap { String(format: "%02x", $0) }.joined()
     }
 }
-
-extension Array where Element: Hashable {
-    func stableHash() -> String {
-        // Convert the array into a stable string representation.
-        // For a simple approach, we can just join the string representations of each element.
-        // If stability is crucial, ensure each element's string representation is stable.
-        let combined = self.map { "\($0)" }.joined(separator: "||")
-
-        return combined.stableHash
-    }
-}
