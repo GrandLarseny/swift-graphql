@@ -50,9 +50,9 @@ public enum GraphQLField {
     /// - Note: Fragments don't have alias.
     public var alias: String? {
         switch self {
-        case let .leaf(name, parent, arguments),
-            let .composite(name, parent, _, arguments, _):
-            return "\(name.camelCasePreservingSurroundingUnderscores)\(parent.camelCasePreservingSurroundingUnderscores)_\(arguments.hash)"
+        case let .leaf(name, parent, _),
+            let .composite(name, parent, _, _, _):
+            return "\(name.camelCasePreservingSurroundingUnderscores)\(parent.pascalCase)"
         case .fragment:
             return nil
         }

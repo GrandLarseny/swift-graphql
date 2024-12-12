@@ -82,12 +82,5 @@ public struct Argument: Hashable {
 
 extension Array where Element == Argument {
     /// Returns the hash of the collection of arguments.
-    var hash: String {
-        let combined = self.compactMap {
-            guard let description = $0.value?.description else { return nil }
-            return description
-        }.joined(separator: "||")
-
-        return combined.stableHash
-    }
+    var hash: String { hashValue.hash }
 }
